@@ -1,0 +1,25 @@
+{
+  "name": "fitnessapi",
+  "version": "1.0.0",
+  "description": "„Workout starten“ → Backend liefert 5 zufällige Übungen<br>\r Übungen mit Timer (z. B. 30 Sek. Plank)<br>\r Schwierigkeitsgrade (z. B. „Einfach“ = 10 Kniebeugen, „Schwer“ = 30)<br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshuaTechstarter/FitnessAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshuaTechstarter/FitnessAPI/issues"
+  },
+  "homepage": "https://github.com/JoshuaTechstarter/FitnessAPI#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9"
+  }
+}
