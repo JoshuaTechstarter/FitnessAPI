@@ -3,9 +3,10 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const app = express();
+const cors = require('cors');
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "frontend")));
-
+app.use(cors()); // Enable CORS
 function readFile() {
     try {
         if (!fs.existsSync("exercises.json")) {
@@ -110,44 +111,30 @@ app.post("/workout/", (req, res) => {
 // EDIT
 app.put("/workout/:id", (req, res) => {
     try {
-        const id = Number(req.params.id);
-        const exercises = readFile();
-
-        const { name,
-            category,
-            duration,
-            repetitions,
-            level,
-            description } = req.body;
-        const foundExercise = exercises.find(exercise => exercise.id === id);
-
-        if (!foundExercise) {
-            return res.status(404).json({ error: "Exercise not found" });
+        const id = req.params.id;
+        if (isNaN(id)) {
+            return res.status(400).json({ error: "ID muss ein Zahl sein!" });
         }
-
-        if (name) {
-            foundExercise.name = name;
+        id = Number(id);
+        const exercices = readFile();
+        const userExercice = exercices.find(exercice => exercice.id === id);
+        if (!userExercice) {
+            return res.status(404).json({ error: "Exercice nicht gefunden!" });
         }
-        if (category) {
-            foundExercise.category = category;
+        const newName = req.body.name;
+        if (newName) {
+            return res.status(404).json({ error: "Name kann nicht leer sein!" });
         }
-        if (duration) {
-            foundExercise.duration = duration;
+        const newDescription = req.body.description;
+        if (newDescription) {
+            return res.status(404).json({ error: "Description kann nicht leer sein!" });
         }
-        if (repetitions) {
-            foundExercise.repetitions = repetitions;
-        }
-        if (level) {
-            foundExercise.level = level;
-        }
-        if (description) {
-            foundExercise.description = description;
-        }
-        writeFile(exercises);
-        res.json(foundExercise);
-    }
-    catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+        userExercice.name = newName;
+        userExercice.description = newDescription;
+        writeFile(exercices);
+        res.json(userExercice);
+    } catch (err) {
+        res.status(500).json({ error: "Internal Server error!" });
     }
 });
 

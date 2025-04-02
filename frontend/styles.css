@@ -1,0 +1,108 @@
+body {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 10% 80% 10%;
+    background-image: radial-gradient(rgba(27, 25, 25, 0.734), rgba(0, 0, 0, 0.647)), url(../images/bgApplication.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    font-size: 20px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    margin: 0;
+}
+
+header,
+footer {
+    grid-column: 1/-1;
+    height: 30%;
+    text-align: center;
+    padding: 30px;
+
+}
+
+.topnav a {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+}
+
+main {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: auto;
+}
+
+#idLeft {
+    grid-column: 1/2;
+    padding: 80px;
+
+}
+
+#idRight {
+    grid-column: 2/3;
+    padding: 80px 20px;
+}
+
+/*form*/
+input,
+select,
+textarea {
+    padding: 8px 20px;
+    border-radius: 1px;
+    margin: 5px auto;
+    background-color: #f7f7f7;
+    border: 1px solid silver;
+    border-radius: 5px;
+    width: 200px;
+    display: inline;
+    font-size: 14px;
+}
+
+label {
+    width: 200px !important;
+    display: inline-block;
+}
+
+button {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+}
+
+#outputDiv li {
+    display: grid;
+    padding: 10px;
+    margin: 10px 5px;
+    box-shadow: 2px 2px 5px 2px rgb(65 66 70);
+    grid-template-columns: 20% 60%;
+}
+
+
+
+#outputDiv ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.imgexercises {
+    margin: 20px auto;
+}
+
+.mainExercises {
+    display: block;
+}
