@@ -20,6 +20,8 @@
   "homepage": "https://github.com/JoshuaTechstarter/FitnessAPI#readme",
   "dependencies": {
     "express": "^5.1.0",
+    "fitnessapi": "file:",
+    "fs": "^0.0.1-security",
     "nodemon": "^3.1.9"
   }
 }
