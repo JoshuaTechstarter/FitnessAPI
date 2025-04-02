@@ -6,5 +6,5 @@ app.use(express.json())
 
 
 app.listen(5050, () => {
-    console.log("Der Server läuft 💪")
+    console.log("Der Server läuft 🏋️")
 })
