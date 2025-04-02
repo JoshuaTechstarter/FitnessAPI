@@ -42,17 +42,18 @@ app.put("/workout/:id", (req, res) => {
         if (isNaN(id)) {
             return res.status(400).json({ error: "ID muss ein Zahl sein!" });
         }
+        id = Number(id);
         const exercices = readFile();
-        const userExercice = exercices.find(exercice => exercice.id == id);
+        const userExercice = exercices.find(exercice => exercice.id === id);
         if (!userExercice) {
             return res.status(404).json({ error: "Exercice nicht gefunden!" });
         }
         const newName = req.body.name;
-        if (!newName) {
+        if (newName) {
             return res.status(404).json({ error: "Name kann nicht leer sein!" });
         }
         const newDescription = req.body.description;
-        if (!newDescription) {
+        if (newDescription) {
             return res.status(404).json({ error: "Description kann nicht leer sein!" });
         }
         userExercice.name = newName;
