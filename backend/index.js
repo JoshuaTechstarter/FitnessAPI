@@ -47,7 +47,7 @@ function getRandomExercises(array, count) {
 }
 //Route to collect all the exercises
 
-app.get("/exercises", (req, res) => {
+app.get("/workout", (req, res) => {
     try {
         const allExercises = loadAllExercises();
         res.json(allExercises);
@@ -58,7 +58,7 @@ app.get("/exercises", (req, res) => {
 })
 
 //Route to collect 5 random exercises
-app.get("/exercises/random", (req, res) => {
+app.get("/workout/random", (req, res) => {
     try {
         const allExercises = loadAllExercises();
         const randomExercises = getRandomExercises(allExercises, 5);
