@@ -1,46 +1,24 @@
 const { error } = require("console");
 const express = require("express");
-const fs = require("fs")
+const fs = require("fs");
 const path = require("path");
-//const cors = require("cors");
-
 const app = express();
-
-// app.use(cors());
-// app.use(cors({
-//     origin: "http://localhost:5050"
-// }))
-
-app.use(express.json())
-app.use(express.static(path.join(__dirname, "frontend")))
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "frontend")));
 
 function readFile() {
     try {
-        const data = fs.readFileSync("exercices.json", "utf-8");
-        return JSON.parse(data);
-    } catch (error) {
-        console.error("Error reading file:", error);
-        throw error;
-    }
-}
-function writeFile(data) {
-    try {
-        fs.writeFileSync("exercices.json", JSON.stringify(data, null, 2));
-    } catch (error) {
-        console.error("Error writing file:", error);
-        throw error;
-    }
-}
-
-function readFile() {
-    try {
+        if (!fs.existsSync("exercises.json")) {
+            return [];
+        }
         const data = fs.readFileSync("exercises.json", "utf-8");
         return JSON.parse(data);
     } catch (error) {
         console.error("Error reading file:", error);
-        throw error;
+        return [];
     }
 }
+
 function writeFile(data) {
     try {
         fs.writeFileSync("exercises.json", JSON.stringify(data, null, 2));
@@ -49,6 +27,7 @@ function writeFile(data) {
         throw error;
     }
 }
+
 
 function loadAllExercises() {
     return readFile()
@@ -96,9 +75,39 @@ app.get("/workout/random", (req, res) => {
 })
 
 
+// CREATE
+app.post("/workout/", (req, res) => {
+    try {
+        if (!req.is("application/json")) {
+            return res.status(400).json({ error: "Invalid Content-Type, expected application/json" });
+        }
 
+        const exercises = readFile();
+        const { name, category, duration, repetitions, level, description } = req.body;
 
+        if (!name || !category || !duration || !repetitions || !level || !description) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
 
+        const newExercise = {
+            id: exercises.length + 1,
+            name,
+            category,
+            duration,
+            repetitions,
+            level,
+            description,
+        };
+
+        exercises.push(newExercise);
+        writeFile(exercises);
+        res.status(201).json(newExercise);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// EDIT
 app.put("/workout/:id", (req, res) => {
     try {
         const id = req.params.id;
@@ -129,5 +138,5 @@ app.put("/workout/:id", (req, res) => {
 })
 
 app.listen(5050, () => {
-    console.log("Der Server läuft 🏋️")
-})
+    console.log("Der Server läuft 🏋️");
+});
