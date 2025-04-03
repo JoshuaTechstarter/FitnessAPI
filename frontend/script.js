@@ -1,3 +1,6 @@
+const { exec } = require("child_process");
+const { writeFile } = require("fs");
+
 const modal = document.getElementById("myModal");
 const openModalBtn = document.getElementById("openModalBtn");
 const closeModal = document.querySelector(".close");
@@ -7,7 +10,7 @@ const idRight = document.getElementById("idRight");
 
 openModalBtn.onclick = function () {
     modal.style.display = "block";
-};
+}
 
 
 closeModal.onclick = function () {
@@ -73,7 +76,7 @@ btnShowAll.addEventListener("click", function () {
                     form.description.value = exercise.description;
                     form.image.value = exercise.image;
 
-                    // Optionally store the exercise ID for updating
+
                     form.setAttribute("data-exercise-id", exercise.id);
                 });
 
@@ -89,4 +92,49 @@ btnShowAll.addEventListener("click", function () {
             idRight.innerHTML = "<p style='color: red;'>Failed to load exercises.</p>";
         });
 });
+//add exercise
+const addExercise = document.getElementById("addExercise");
+const showExercise = document.getElementById("newExerciesDiv")
+addExercise.addEventListener("click", (event) => {
+    event.preventDefault();
 
+    const exercise = {
+        name: form.name.value,
+        category: form.category.value,
+        duration: form.duration.value,
+        repetitions: form.repetitions.value,
+        level: form.level.value,
+        description: form.description.value,
+        image: form.image.value
+    };
+
+    fetch("http://localhost:5050/workout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(exercise)
+    }).then(res => res.json())
+        .then(data => {
+
+            showExercise.innerHTML = `<p style="color: green;">Exercise added successfully!</p>`;
+            form.reset(); // Réinitialiser le formulaire après l'ajout
+
+
+        })
+
+    function refreshList() {
+        liste.innerHTML = "";
+        fetch("http://localhost:5050/workout")
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(element => {
+                    let newListItem = document.createElement("li");
+                    newListItem.innerText = `#${element.id}: ${element.name} (${element.art})`
+                    liste.appendChild(newListItem)
+                });
+            })
+            .catch(err => {
+                console.error("Fehler beim refresh:", err);
+            })
+    }
+
+})
