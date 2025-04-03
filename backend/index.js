@@ -108,35 +108,63 @@ app.post("/workout/", (req, res) => {
     }
 });
 
+
+
 // EDIT
 app.put("/workout/:id", (req, res) => {
     try {
-        const id = req.params.id;
-        if (isNaN(id)) {
-            return res.status(400).json({ error: "ID muss ein Zahl sein!" });
+        const id = Number(req.params.id);
+        const exercises = readFile();
+
+        const { name,
+            category,
+            duration,
+            repetitions,
+            level,
+            description } = req.body;
+        const foundExercise = exercises.find(exercise => exercise.id === id);
+
+        if (!foundExercise) {
+            return res.status(404).json({ error: "Exercise not found" });
         }
-        id = Number(id);
-        const exercices = readFile();
-        const userExercice = exercices.find(exercice => exercice.id === id);
-        if (!userExercice) {
-            return res.status(404).json({ error: "Exercice nicht gefunden!" });
+
+        if (name) {
+            foundExercise.name = name;
         }
-        const newName = req.body.name;
-        if (newName) {
-            return res.status(404).json({ error: "Name kann nicht leer sein!" });
+        if (category) {
+            foundExercise.category = category;
         }
-        const newDescription = req.body.description;
-        if (newDescription) {
-            return res.status(404).json({ error: "Description kann nicht leer sein!" });
+        if (duration) {
+            foundExercise.duration = duration;
         }
-        userExercice.name = newName;
-        userExercice.description = newDescription;
-        writeFile(exercices);
-        res.json(userExercice);
-    } catch (err) {
-        res.status(500).json({ error: "Internal Server error!" });
+        if (repetitions) {
+            foundExercise.repetitions = repetitions;
+        }
+        if (level) {
+            foundExercise.level = level;
+        }
+        if (description) {
+            foundExercise.description = description;
+        }
+        writeFile(exercises);
+        res.json(foundExercise);
+    }
+    catch (error) {
+        res.status(500).json({ error: "Internal server error" });
     }
 });
+
+app.get("/workout/:id", (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const exercises = readFile();
+        const foundExercise = exercises.find(exercise => exercise.id === id);
+        if (!foundExercise) {
+            return res.status(404).json({ error: "Exercise not found" });
+        }
+        res.json(foundExercise)
+    } catch (err) { res.status(500).json({ error: "Internal Server Error: ${err}" }) }
+})
 
 app.listen(5050, () => {
     console.log("Der Server läuft 🏋️");
