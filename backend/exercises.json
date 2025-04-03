@@ -7,7 +7,7 @@
     "repetitions": 15,
     "level": "easy",
     "description": "A classic strength exercise that strengthens the arms, shoulders, and chest.",
-    "image": "./images/pupushup.jpg"
+    "image": "../images/pushup.jpg"
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "repetitions": 20,
     "level": "medium",
     "description": "An effective exercise to strengthen the thighs, glutes, and improve endurance.",
-    "image": "./images/squats.jpg"
+    "image": "../images/squats.jpg"
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "repetitions": 2,
     "level": "hard",
     "description": "An isometric exercise that engages the core and abdominal muscles to improve stability.",
-    "image": "./images/plank.webp"
+    "image": "../images/plank.webp"
   },
   {
     "id": 4,
@@ -37,7 +37,7 @@
     "repetitions": 12,
     "level": "medium",
     "description": "A lower body exercise that targets the quads, hamstrings, and glutes.",
-    "image": "./images/lunges.jpg"
+    "image": "../images/lunges.jpg"
   },
   {
     "id": 5,
@@ -47,7 +47,7 @@
     "repetitions": 10,
     "level": "hard",
     "description": "A full-body exercise that combines a squat, push-up, and jump to improve endurance.",
-    "image": "./images/burpees.jpg"
+    "image": "../images/burpees.jpg"
   },
   {
     "id": 6,
@@ -57,7 +57,7 @@
     "repetitions": 30,
     "level": "easy",
     "description": "A great warm-up exercise that increases heart rate and improves coordination.",
-    "image": "./images/jumpingJacks.jpg"
+    "image": "../images/jumpingJacks.jpg"
   },
   {
     "id": 7,
@@ -67,7 +67,7 @@
     "repetitions": 20,
     "level": "medium",
     "description": "A high-intensity cardio and core exercise that mimics a climbing motion.",
-    "image": "./images/mountain-climbers-fitness.avif"
+    "image": "../images/mountain-climbers-fitness.avif"
   },
   {
     "id": 8,
@@ -77,7 +77,7 @@
     "repetitions": 15,
     "level": "easy",
     "description": "A classic abdominal exercise that strengthens the core muscles.",
-    "image": "./images/sit-ups.jpg"
+    "image": "../images/sit-ups.jpg"
   },
   {
     "id": 9,
@@ -87,7 +87,7 @@
     "repetitions": 12,
     "level": "medium",
     "description": "A core-strengthening exercise that targets the lower abdominal muscles.",
-    "image": "./images/leg-raises.jpg"
+    "image": "../images/leg-raises.jpg"
   },
   {
     "id": 10,
@@ -97,7 +97,7 @@
     "repetitions": 0,
     "level": "medium",
     "description": "A cardio-intensive exercise that improves coordination and endurance.",
-    "image": "./images/jump-rope.jpg"
+    "image": "../images/jump-rope.jpg"
   },
   {
     "id": 11,
@@ -107,7 +107,7 @@
     "repetitions": 15,
     "level": "medium",
     "description": "A great bodyweight exercise to strengthen the triceps and shoulders.",
-    "image": "./images/tricepsDips.jpg"
+    "image": "../images/tricepsDips.jpg"
   },
   {
     "id": 12,
@@ -117,7 +117,7 @@
     "repetitions": 2,
     "level": "hard",
     "description": "An isometric exercise that builds endurance and strength in the legs.",
-    "image": "./images/wallSit.jpg"
+    "image": "../images/wallSit.jpg"
   },
   {
     "id": 13,
@@ -127,6 +127,6 @@
     "repetitions": 20,
     "level": "medium",
     "description": "A rotational core exercise that engages the oblique muscles and improves balance.",
-    "image": "./images/russianTwists.jpg"
+    "image": "../images/russianTwists.jpg"
   }
 ]
