@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/JoshuaTechstarter/FitnessAPI#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "fitnessapi": "file:",
     "fs": "^0.0.1-security",
