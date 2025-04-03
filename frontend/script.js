@@ -167,7 +167,7 @@ document.getElementById("showAllButton").addEventListener("click", function () {
         })
         .then(function (exercises) {
             // Display the exercises in the output div
-            let outputDiv = document.getElementById("output");
+            let outputDiv = document.getElementById("outputDiv");
             let listHtml = "<ul>";
 
             exercises.forEach(function (exercise) {
@@ -192,7 +192,7 @@ document.getElementById("showAllButton").addEventListener("click", function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById("startButton");
-    const outputDiv = document.getElementById("output");
+    const outputDiv = document.getElementById("outputDiv");
     const timerDiv = document.getElementById("timer");
 
     if (!startButton || !outputDiv || !timerDiv) {
