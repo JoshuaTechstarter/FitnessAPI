@@ -2,7 +2,12 @@ const { error } = require("console");
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const cors = require("cors");
 const app = express();
+app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:5500", /*"null"*/]
+}))
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "frontend")));
 
@@ -150,6 +155,18 @@ app.put("/workout/:id", (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+app.get("/workout/:id", (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const exercises = readFile();
+        const foundExercise = exercises.find(exercise => exercise.id === id);
+        if (!foundExercise) {
+            return res.status(404).json({ error: "Exercise not found" });
+        }
+        res.json(foundExercise)
+    } catch (err) { res.status(500).json({ error: "Internal Server Error: ${err}" }) }
+})
 
 app.listen(5050, () => {
     console.log("Der Server läuft 🏋️");
