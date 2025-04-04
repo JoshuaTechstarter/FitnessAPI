@@ -102,6 +102,11 @@ app.post("/workout/", (req, res) => {
         if (!name || !category || !duration || !repetitions || !level || !description) {
             return res.status(400).json({ error: "Missing required fields" });
         }
+        const nameTaken = exercises.find((exercise) => exercise.name == name);
+        if (nameTaken) {
+            return res.status(400).json({ error: "This exercise already existst" });
+        }
+
 
         const newExercise = {
             id: exercises.length + 1,
