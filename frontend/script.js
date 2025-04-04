@@ -7,7 +7,8 @@ const idRight = document.getElementById("idRight");
 const searchContainer = document.getElementById("SearchDiv");
 const addBtn = document.getElementById("addExercise");
 const confirmBtn = document.getElementById("datelard");
-const beschreibung = document.getElementById("beshreibung")
+const beschreibung = document.getElementById("beshreibung");
+const circleTimer = document.getElementById("circleTimer")
 
 openModalBtn.onclick = function () {
     modal.style.display = "block";
@@ -179,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     startButton.addEventListener("click", function () {
         beshreibung.style.display = "none"
+        circleTimer.style.display = "block"
         if (isExerciseInProgress) {
             console.log("An exercise is already in progress. Please wait until the current one finishes.");
 
