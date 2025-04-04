@@ -224,11 +224,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startCountdown(duration, callback) {
         let timeLeft = duration;
-        timerDiv.innerHTML = `Time remaining: ${timeLeft}s`;
+        timerDiv.innerHTML = `${timeLeft}s`;
 
         const countdownInterval = setInterval(() => {
             timeLeft--;
-            timerDiv.innerHTML = `Time remaining: ${timeLeft}s`;
+            timerDiv.innerHTML = `${timeLeft}s`;
 
             if (timeLeft <= 0) {
                 clearInterval(countdownInterval);
