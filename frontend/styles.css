@@ -55,6 +55,11 @@ footer {
 
 }
 
+footer {
+    margin: 30px;
+    padding: 30px;
+}
+
 .topnav a {
     text-decoration: none;
     cursor: pointer;
