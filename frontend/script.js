@@ -47,14 +47,15 @@ btnShowAll.addEventListener("click", function () {
                 card.innerHTML = `
                     <img src="${exercise.image}" alt="${exercise.name}" class="exercise-image" width="150px" height="auto">
                     <h3>${exercise.name}</h3>
+                    <p><strong>ID:</strong> ${exercise.id}</p>
                     <p><strong>Category:</strong> ${exercise.category}</p>
                     <p><strong>Duration:</strong> ${exercise.duration} sec</p>
                     <p><strong>Repetitions:</strong> ${exercise.repetitions}</p>
                     <p><strong>Level:</strong> ${exercise.level}</p>
                     <p class="description">${exercise.description}</p>
                     <div class="card-buttons">
-                        <button class="edit-btn">✏️ Edit</button>
-                        
+                        <button  class="edit-btn">✏️ Edit</button>
+
                     </div><br> <br>
                 `;
                 // Add event listener to the "Edit" button
@@ -65,6 +66,7 @@ btnShowAll.addEventListener("click", function () {
 
                     // Populate the form with the exercise data
                     formTitle.textContent = `Edit Exercise: ${exercise.name}`;
+                    form.id.value = exercise.id;
                     form.name.value = exercise.name;
                     form.category.value = exercise.category;
                     form.duration.value = exercise.duration;
@@ -132,9 +134,8 @@ function loadData() {
             alert("Fehler beim Abrufen der Übung. Stelle sicher, dass die ID existiert.");
         });
 }
-suchen.addEventListener("click", loadData);
 
-change.addEventListener("click", function changeExercise() {
+suchen.addEventListener("click", function changeExercise() {
     fetch(`http://127.0.0.1:5050/workout/${Number(id.value)}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -155,40 +156,40 @@ change.addEventListener("click", function changeExercise() {
         })
 })
 
-document.getElementById("showAllButton").addEventListener("click", function () {
-    // Fetch data from the server
-    fetch("http://localhost:5050/workout")  // Update the URL to point to the backend
-        .then(function (response) {
-            // Check if the response is OK
-            if (!response.ok) {
-                throw new Error("Error loading data");
-            }
-            return response.json(); // Convert response to JSON
-        })
-        .then(function (exercises) {
-            // Display the exercises in the output div
-            let outputDiv = document.getElementById("outputDiv");
-            let listHtml = "<ul>";
+// document.getElementById("showAllButton").addEventListener("click", function () {
+//     // Fetch data from the server
+//     fetch("http://localhost:5050/workout")  // Update the URL to point to the backend
+//         .then(function (response) {
+//             // Check if the response is OK
+//             if (!response.ok) {
+//                 throw new Error("Error loading data");
+//             }
+//             return response.json(); // Convert response to JSON
+//         })
+//         .then(function (exercises) {
+//             // Display the exercises in the output div
+//             let outputDiv = document.getElementById("outputDiv");
+//             let listHtml = "<ul>";
 
-            exercises.forEach(function (exercise) {
-                listHtml += `<li>
-                    <strong>Name:</strong> ${exercise.name}<br>
-                    <strong>Category:</strong> ${exercise.category}<br>
-                    <strong>Duration:</strong> ${exercise.duration} min<br>
-                    <strong>Repetitions:</strong> ${exercise.repetitions}<br>
-                    <strong>Level:</strong> ${exercise.level}<br>
-                    <strong>Description:</strong> ${exercise.description}<br>
-                    <img src="${exercise.image}"/><br>
-                </li><br>`;
-            });
+//             exercises.forEach(function (exercise) {
+//                 listHtml += `<li>
+//                     <strong>Name:</strong> ${exercise.name}<br>
+//                     <strong>Category:</strong> ${exercise.category}<br>
+//                     <strong>Duration:</strong> ${exercise.duration} min<br>
+//                     <strong>Repetitions:</strong> ${exercise.repetitions}<br>
+//                     <strong>Level:</strong> ${exercise.level}<br>
+//                     <strong>Description:</strong> ${exercise.description}<br>
+//                     <img src="${exercise.image}"/><br>
+//                 </li><br>`;
+//             });
 
-            listHtml += "</ul>";
-            outputDiv.innerHTML = listHtml;
-        })
-        .catch(function (error) {
-            console.log("Error:", error);
-        });
-});
+//             listHtml += "</ul>";
+//             outputDiv.innerHTML = listHtml;
+//         })
+//         .catch(function (error) {
+//             console.log("Error:", error);
+//         });
+// });
 
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById("startButton");
@@ -196,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const timerDiv = document.getElementById("timer");
 
     if (!startButton || !outputDiv || !timerDiv) {
-        console.error("One or more required elements are missing from the DOM.");
+        //console.error("One or more required elements are missing from the DOM.");
         return;
     }
 
@@ -270,6 +271,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 });
-
-
-
