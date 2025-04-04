@@ -1,5 +1,4 @@
-const { exec } = require("child_process");
-const { writeFile } = require("fs");
+
 
 const modal = document.getElementById("myModal");
 const openModalBtn = document.getElementById("openModalBtn");
