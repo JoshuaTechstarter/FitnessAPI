@@ -179,10 +179,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function fetchExercisesAndStart() {
-        fetch("http://localhost:5050/workout/random") // Correct URL to backend API
+        fetch("http://localhost:5050/workout/random")
             .then(response => response.json())
             .then(data => {
-                exercises = data;  // Store the exercises in the array
+                exercises = data;
+                currentExerciseIndex = 0;         // Reset the index for a new workout
+                isExerciseInProgress = true;      // Allow new workout
                 startExercise();
             })
             .catch(error => {
@@ -192,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startExercise() {
         if (currentExerciseIndex < exercises.length) {
-            isExerciseInProgress = true; // Set the flag to true when an exercise starts
             const exercise = exercises[currentExerciseIndex];
             displayExercise(exercise);
             startCountdown(exercise.duration, function () {
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <h2>Exercise: ${exercise.name}</h2>
             <p>Description: <br>${exercise.description}</p>
             <p>Goal: <br>${exercise.repetitions} repetitions in ${exercise.duration}s</p>
-            <img src="${exercise.image}"/><br>
+            <img src="${exercise.image}" width="800px" height="auto"/><br>
 
         `;
     }
