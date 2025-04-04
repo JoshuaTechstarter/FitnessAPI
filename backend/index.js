@@ -75,6 +75,19 @@ app.get("/workout/random", (req, res) => {
     }
 })
 
+app.get("/workout/search", (req, res) => {
+    try {
+        const { name, category, level } = req.query;
+        const exercises = readFile();
+        const filtered = exercises.filter(ex =>
+            (!category || ex.category === category) &&
+            (!name || ex.name.toLowerCase() === name.toLowerCase()) &&
+            (!level || ex.level === level));
+        res.json(filtered);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 // CREATE
 app.post("/workout/", (req, res) => {
