@@ -45,7 +45,7 @@ btnShowAll.addEventListener("click", function () {
                 card.classList.add("exercise-card");
 
                 card.innerHTML = `
-                    <img src="${exercise.image}" alt="${exercise.name}" class="exercise-image" width="150px" height="auto">
+                    <img src="${exercise.image || '../images/default.jpg'}" alt="${exercise.name}" class="exercise-image" width="150px" height="auto">
                     <h3>${exercise.name}</h3>
                     <p><strong>ID:</strong> ${exercise.id}</p>
                     <p><strong>Category:</strong> ${exercise.category}</p>
@@ -237,3 +237,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 });
+
+
+//add exercise
+const addExercise = document.getElementById("addExercise");
+const showExercise = document.getElementById("newExerciesDiv")
+addExercise.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const exercise = {
+        name: form.name.value,
+        category: form.category.value,
+        duration: form.duration.value,
+        repetitions: form.repetitions.value,
+        level: form.level.value,
+        description: form.description.value,
+
+    };
+
+    fetch("http://localhost:5050/workout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(exercise)
+    }).then(res => res.json())
+        .then(data => {
+
+            showExercise.innerHTML = `<p style="color: green;">Exercise added successfully!</p>`;
+            form.reset();
+
+
+        })
+})
