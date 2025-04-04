@@ -4,6 +4,7 @@ const closeModal = document.querySelector(".close");
 const formTitle = document.getElementById("formTitle"); // <legend> element
 const form = document.getElementById("editForm");
 const idRight = document.getElementById("idRight");
+const searchContainer = document.getElementById("SearchDiv");
 
 openModalBtn.onclick = function () {
     modal.style.display = "block";
@@ -24,6 +25,9 @@ window.onclick = function (event) {
 
 const btnShowAll = document.getElementById("showAll")
 btnShowAll.addEventListener("click", function () {
+
+    // Hide the modal if it's open
+    searchContainer.style.display = "block";
     fetch("http://localhost:5050/workout")
         .then(response => {
             if (!response.ok) {
@@ -267,4 +271,60 @@ addExercise.addEventListener("click", (event) => {
 
 
         })
+})
+// Search Functionality
+const searchBtn = document.getElementById("searchBtn");
+const searchName = document.getElementById("searchName");
+const searchCategory = document.getElementById("searchCategory");
+const searchLevel = document.getElementById("searchLevel");
+
+// search Functionality
+
+
+searchBtn.addEventListener("click", function searchExercises() {
+    // create URLSearchParams object to hold query parameters
+    const params = new URLSearchParams({
+        name: searchName.value,
+        category: searchCategory.value,
+        level: searchLevel.value
+    });
+
+    // Send GET request to the backend with query parameters
+    fetch(`http://localhost:5050/workout/search?${params}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(exercises => {
+            // Clear previous content
+            idRight.innerHTML = "<h2>Search Results</h2>";
+
+            // create a display grid "showAll"
+            const grid = document.createElement("div");
+            grid.classList.add("exercise-grid");
+
+            exercises.forEach(exercise => {
+                const card = document.createElement("div");
+                card.classList.add("exercise-card");
+                card.innerHTML = `
+                    <img src="${exercise.image}" alt="${exercise.name}" class="exercise-image" width="150px" height="auto">
+                    <h3>${exercise.name}</h3>
+                    <p><strong>ID:</strong> ${exercise.id}</p>
+                    <p><strong>Category:</strong> ${exercise.category}</p>
+                    <p><strong>Duration:</strong> ${exercise.duration} sec</p>
+                    <p><strong>Repetitions:</strong> ${exercise.repetitions}</p>
+                    <p><strong>Level:</strong> ${exercise.level}</p>
+                    <p class="description">${exercise.description}</p>
+                `;
+                grid.appendChild(card);
+            });
+
+            idRight.appendChild(grid);
+        })
+        .catch(error => {
+            console.error("Search failed:", error);
+            idRight.innerHTML = "<p style='color: red;'>Search failed. Check the console for details.</p>";
+        });
 })
