@@ -156,41 +156,6 @@ suchen.addEventListener("click", function changeExercise() {
         })
 })
 
-// document.getElementById("showAllButton").addEventListener("click", function () {
-//     // Fetch data from the server
-//     fetch("http://localhost:5050/workout")  // Update the URL to point to the backend
-//         .then(function (response) {
-//             // Check if the response is OK
-//             if (!response.ok) {
-//                 throw new Error("Error loading data");
-//             }
-//             return response.json(); // Convert response to JSON
-//         })
-//         .then(function (exercises) {
-//             // Display the exercises in the output div
-//             let outputDiv = document.getElementById("outputDiv");
-//             let listHtml = "<ul>";
-
-//             exercises.forEach(function (exercise) {
-//                 listHtml += `<li>
-//                     <strong>Name:</strong> ${exercise.name}<br>
-//                     <strong>Category:</strong> ${exercise.category}<br>
-//                     <strong>Duration:</strong> ${exercise.duration} min<br>
-//                     <strong>Repetitions:</strong> ${exercise.repetitions}<br>
-//                     <strong>Level:</strong> ${exercise.level}<br>
-//                     <strong>Description:</strong> ${exercise.description}<br>
-//                     <img src="${exercise.image}"/><br>
-//                 </li><br>`;
-//             });
-
-//             listHtml += "</ul>";
-//             outputDiv.innerHTML = listHtml;
-//         })
-//         .catch(function (error) {
-//             console.log("Error:", error);
-//         });
-// });
-
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById("startButton");
     const outputDiv = document.getElementById("outputDiv");
