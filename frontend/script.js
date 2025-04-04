@@ -5,6 +5,9 @@ const formTitle = document.getElementById("formTitle"); // <legend> element
 const form = document.getElementById("editForm");
 const idRight = document.getElementById("idRight");
 const searchContainer = document.getElementById("SearchDiv");
+const addBtn = document.getElementById("addExercise");
+const confirmBtn = document.getElementById("datelard");
+const beschreibung = document.getElementById("beshreibung")
 
 openModalBtn.onclick = function () {
     modal.style.display = "block";
@@ -79,8 +82,8 @@ btnShowAll.addEventListener("click", function () {
                     form.description.value = exercise.description;
                     form.image.value = exercise.image;
 
-                    // Optionally store the exercise ID for updating
-                    form.setAttribute("data-exercise-id", exercise.id);
+                    confirmBtn.style.display = "inline-block";
+                    addBtn.style.display = "none";
                 });
 
                 // Add the exercise to the grid
@@ -175,8 +178,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let isExerciseInProgress = false; // Flag to check if exercise has already started
 
     startButton.addEventListener("click", function () {
+        beshreibung.style.display = "none"
         if (isExerciseInProgress) {
             console.log("An exercise is already in progress. Please wait until the current one finishes.");
+
             return; // Prevent starting a new exercise if one is in progress
         }
         fetchExercisesAndStart();
@@ -225,21 +230,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
         `;
     }
-
     function startCountdown(duration, callback) {
-        let timeLeft = duration;
-        timerDiv.innerHTML = `${timeLeft}s`;
+        const circle = document.querySelector('.progress-ring__circle');
+        const text = document.getElementById('circleText');
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
 
-        const countdownInterval = setInterval(() => {
+        circle.style.strokeDasharray = `${circumference}`;
+        circle.style.strokeDashoffset = `${circumference}`;
+
+        let timeLeft = duration;
+
+        function setProgress(percent) {
+            const offset = circumference - (percent / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+        }
+
+        setProgress(0);
+        text.textContent = timeLeft;
+
+        const interval = setInterval(() => {
             timeLeft--;
-            timerDiv.innerHTML = `${timeLeft}s`;
+            const progress = ((duration - timeLeft) / duration) * 100;
+            setProgress(progress);
+            text.textContent = timeLeft;
 
             if (timeLeft <= 0) {
-                clearInterval(countdownInterval);
+                clearInterval(interval);
+                setProgress(100);
+                text.textContent = "0";
                 callback();
             }
         }, 1000);
     }
+
 });
 
 
@@ -328,3 +352,18 @@ searchBtn.addEventListener("click", function searchExercises() {
             idRight.innerHTML = "<p style='color: red;'>Search failed. Check the console for details.</p>";
         });
 })
+
+
+
+openModalBtn.addEventListener("click", () => {
+    modal.style.display = "block";
+    form.reset();
+
+
+    addBtn.style.display = "inline-block";
+    confirmBtn.style.display = "none";
+    formTitle.textContent = "Add New Exercise";
+    id.value = "";
+});
+
+
