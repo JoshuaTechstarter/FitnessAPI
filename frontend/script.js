@@ -272,7 +272,7 @@ addExercise.addEventListener("click", (event) => {
 
         })
 })
-
+// Search Functionality
 const searchBtn = document.getElementById("searchBtn");
 const searchName = document.getElementById("searchName");
 const searchCategory = document.getElementById("searchCategory");
