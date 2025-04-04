@@ -4,6 +4,8 @@ const closeModal = document.querySelector(".close");
 const formTitle = document.getElementById("formTitle"); // <legend> element
 const form = document.getElementById("editForm");
 const idRight = document.getElementById("idRight");
+const addBtn = document.getElementById("addExercise");
+const confirmBtn = document.getElementById("datelard");
 
 openModalBtn.onclick = function () {
     modal.style.display = "block";
@@ -75,8 +77,10 @@ btnShowAll.addEventListener("click", function () {
                     form.description.value = exercise.description;
                     form.image.value = exercise.image;
 
-                    // Optionally store the exercise ID for updating
-                    form.setAttribute("data-exercise-id", exercise.id);
+
+                    confirmBtn.style.display = "inline-block";
+                    addBtn.style.display = "none";
+
                 });
 
                 // Add the exercise to the grid
@@ -268,3 +272,17 @@ addExercise.addEventListener("click", (event) => {
 
         })
 })
+
+
+
+
+openModalBtn.addEventListener("click", () => {
+    modal.style.display = "block";
+    form.reset();
+
+
+    addBtn.style.display = "inline-block";
+    confirmBtn.style.display = "none";
+    formTitle.textContent = "Add New Exercise";
+    id.value = "";
+});
