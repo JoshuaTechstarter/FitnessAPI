@@ -12,9 +12,8 @@
 <body>
     <header>
         <div class="topnav">
-            <a href="#">Home</a>
-            <a href="exercises.html">Show all Exercises</a>
-            <a href="#">About us</a>
+            <a href="index.html">Home</a>
+            <a href="about.html">About us</a>
             <a href="#">Contact</a>
         </div>
         <hr>
@@ -62,8 +61,8 @@
                         <label for="image">Image URL:</label>
                         <input type="text" id="image" name="image" required><br><br>
 
-                        <button id="datelard" type="submit">Confirm</button>
-                        <button id="addExercise">Add Exercise</button>
+                        <button id="addExercise" type="submit" style="display: none;">Add Exercise</button>
+                        <button id="datelard" type="submit" style="display: none;">Confirm</button>
                     </fieldset>
                 </form>
             </div>
@@ -73,12 +72,11 @@
             <button id="startButton">Start Workout</button>
             <div id="btnExercises">
                 <button id="openModalBtn">Add new Exercise</button>
-                <button>Edit Exercise</button>
 
                 <button id="showAll">Show all Exercise</button>
             </div>
             <div id="SearchDiv" style="display:none">
-                <input type="text" id="searchName" placeholder="Exercise Name" required>
+                <input type="text" id="searchName" placeholder="Exercise Name" required><br>
                 <select id="searchCategory" required>
                     <option value="">All Categories</option>
                     <option value="Upper body">Upper body</option>
@@ -86,20 +84,43 @@
                     <option value="Full body">Full body</option>
                     <option value="Core">Core</option>
                     <option value="Cardio">Cardio</option>
-                </select>
+                </select><br>
                 <select id="searchLevel" required>
                     <option value="">All Levels</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
-                </select>
+                </select><br>
                 <button id="searchBtn">Search Exercises</button>
             </div> <br><br>
         </div>
 
         <div id="idRight">
             <div id="outputDiv"></div>
-            <div id="timer"></div>
+            <div id="timer">
+                <div id="beshreibung">
+                    <p><b>With a clean and easy-to-use interface, you can:</b></p>
+                    <ul>
+                        <li>Start random workouts in just one click</li>
+                        <li>Add, edit, and browse personalized exercises</li>
+                        <li>Track your progress by saving completed workouts</li>
+                        <li>Explore a growing library of exercises for all fitness levels</li>
+                        <li>Whether you’re a beginner or a seasoned athlete, FitnessAPI gives you the tools to train
+                            smart,
+                            stay
+                            consistent, and reach your goals—anytime, anywhere.</li>
+                    </ul>
+                </div>
+                <div id="circleTimer">
+                    <svg class="progress-ring" width="120" height="120">
+                        <circle class="progress-ring__circle" stroke="dodgerblue" stroke-width="8" fill="transparent"
+                            r="52" cx="60" cy="60" />
+                    </svg>
+                    <div id="circleText">0</div>
+                </div>
+
+
+            </div>
         </div>
 
     </main>
