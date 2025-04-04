@@ -13,6 +13,35 @@ body {
     margin: 0;
 }
 
+h1 {
+    text-align: center;
+    grid-column: 1 / -1;
+    margin: 20px;
+    padding: 20px 0;
+    font-size: 55px !important;
+}
+
+.animated-text {
+
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 main {
     height: 100vh;
 }

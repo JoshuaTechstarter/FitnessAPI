@@ -166,6 +166,36 @@ app.get("/workout/:id", (req, res) => {
     } catch (err) { res.status(500).json({ error: "Internal Server Error: ${err}" }) }
 })
 
+
+
+//add new Exercise
+app.post("/workout", (req, res) => {
+    try {
+        const exercises = readFile();
+        const { name, category, duration, repetitions, level, description } = req.body
+
+        const nameTaken = exercises.find((tier) => exercice.name == name);
+        if (nameTaken) {
+            return res.status(400).json({ error: "diesre Exercise exist schon" });
+        }
+        const newExercise = {
+            id: tiere.length + 1, // besser (komplexere Logik) -> tiere.length > 0 ? Math.max(...tiere.map(a => a.id)) + 1 : 1;
+            name: name,
+            category: category,
+            duration: duration,
+            repetitions: repetitions,
+            level: level,
+            description: description,
+
+        }
+        exercises.push(newExercise)
+        writeFile(exercises)
+        res.status(201).json(newExercise)
+    } catch (err) {
+        res.status(500).json({ error: "Internal Server error!" })
+    }
+})
+
 app.listen(5050, () => {
     console.log("Der Server läuft 🏋️");
 });
