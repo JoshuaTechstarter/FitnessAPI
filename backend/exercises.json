@@ -128,5 +128,14 @@
     "level": "medium",
     "description": "A rotational core exercise that engages the oblique muscles and improves balance.",
     "image": "../images/russianTwists.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Test",
+    "category": "Upper body",
+    "duration": "30",
+    "repetitions": "2",
+    "level": "easy",
+    "description": "Das ist kein Test"
   }
 ]
